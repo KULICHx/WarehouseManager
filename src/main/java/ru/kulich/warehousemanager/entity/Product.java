@@ -1,7 +1,7 @@
 package ru.kulich.warehousemanager.entity;
 
 import lombok.Data;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
