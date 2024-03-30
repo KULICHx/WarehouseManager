@@ -2,6 +2,9 @@ package ru.kulich.warehousemanager.entity;
 
 import lombok.Data;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,9 +16,10 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(nullable = false)
+    @NotBlank(message = "Name is required")
     private String name;
 
+    @NotBlank(message = "Article is required")
     @Column(unique = true, nullable = false)
     private String article;
 
@@ -23,10 +27,12 @@ public class Product {
 
     private String category;
 
-    @Column(nullable = false)
+    @NotNull(message = "Price is required")
+    @PositiveOrZero(message = "Price must be positive or zero")
     private double price;
 
-    @Column(nullable = false)
+    @NotNull(message = "Quantity is required")
+    @PositiveOrZero(message = "Quantity must be positive or zero")
     private int quantity;
 
     @Temporal(TemporalType.TIMESTAMP)
