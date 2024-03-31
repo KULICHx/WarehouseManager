@@ -10,13 +10,20 @@ import java.util.List;
 import java.util.UUID;
 import java.util.Date;
 
-
+/**
+ * Сервис для управления товарами.
+ */
 @Service
 public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
 
+    /**
+     * Создает новый продукт.
+     * @param product Продукт для создания.
+     * @return Созданный продукт.
+     */
     public Product createProduct(Product product) {
         // Установка значений по умолчанию перед сохранением товара, если необходимо
         // Например, установка даты создания
@@ -24,15 +31,32 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    /**
+     * Получает список всех продуктов.
+     * @return Список всех продуктов.
+     */
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
+    /**
+     * Получает продукт по его идентификатору.
+     * @param id Идентификатор продукта.
+     * @return Найденный продукт.
+     * @throws ResourceNotFoundException если продукт не найден.
+     */
     public Product getProductById(UUID id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
     }
 
+    /**
+     * Обновляет данные продукта.
+     * @param id Идентификатор продукта для обновления.
+     * @param product Объект с обновленными данными о продукте.
+     * @return Обновленный продукт.
+     * @throws ResourceNotFoundException если продукт не найден.
+     */
     public Product updateProduct(UUID id, Product product) {
         Product existingProduct = getProductById(id);
         // Обновление существующего товара данными из переданного товара
@@ -46,6 +70,11 @@ public class ProductService {
         return productRepository.save(existingProduct);
     }
 
+    /**
+     * Удаляет продукт по его идентификатору.
+     * @param id Идентификатор продукта для удаления.
+     * @throws ResourceNotFoundException если продукт не найден.
+     */
     public void deleteProduct(UUID id) {
         Product product = getProductById(id);
         productRepository.delete(product);

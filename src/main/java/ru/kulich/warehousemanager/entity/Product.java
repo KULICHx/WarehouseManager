@@ -8,6 +8,9 @@ import jakarta.validation.constraints.PositiveOrZero;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * Класс, представляющий продукт.
+ */
 @Entity
 @Data
 public class Product {
@@ -43,4 +46,27 @@ public class Product {
     @Column(nullable = false, updatable = false)
     private Date createdAt;
 
+    /**
+     * Получает идентификатор продукта.
+     * @return Идентификатор продукта.
+     */
+    public UUID getId() {
+        return id;
+    }
+
+    /**
+     * Получает название продукта.
+     * @return Название продукта.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Получает артикул продукта.
+     * @return Артикул продукта.
+     */
+    public String getArticle() {
+        return article;
+    }
 }

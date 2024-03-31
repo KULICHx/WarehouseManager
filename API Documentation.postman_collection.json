@@ -1,0 +1,231 @@
+{
+	"info": {
+		"_postman_id": "946aea88-a98b-45d6-8d57-4727f3754c06",
+		"name": "API Documentation",
+		"description": "## Introduction\n\nThis document provides documentation for the API endpoints of the Warehouse Manager application. Below you will find details about each API endpoint along with the expected request formats, response formats, and sample usage.\n\n## Authentication\n\nThe Warehouse Manager API does not require authentication for accessing the endpoints at the moment.\n\n## Base URL\n\nAll API endpoints are relative to the base URL:\n\n```\nhttp://localhost:8080/api/products\n\n ```\n\n## API Endpoints\n\n### 1\\. Create Product\n\n- **Endpoint**: `/`\n- **Method**: `POST`\n- **Description**: Creates a new product.\n- { \"name\": \"Product Name\", \"article\": \"Product Article\", \"description\": \"Product Description\", \"category\": \"Product Category\", \"price\": 10.99, \"quantity\": 100}\n- **Response**:\n    - Status Code: `201 Created`\n    - Body: Returns the created product object.\n\n### 2\\. Get All Products\n\n- **Endpoint**: `/`\n- **Method**: `GET`\n- **Description**: Retrieves a list of all products.\n- **Response**:\n    - Status Code: `200 OK`\n    - Body: Returns an array of product objects.\n\n### 3\\. Get Product by ID\n\n- **Endpoint**: `/{productId}`\n- **Method**: `GET`\n- **Description**: Retrieves a specific product by its ID.\n- **Response**:\n    - Status Code: `200 OK`\n    - Body: Returns the product object corresponding to the given ID.\n\n### 4\\. Update Product\n\n- **Endpoint**: `/{productId}`\n- **Method**: `PUT`\n- **Description**: Updates an existing product by its ID.\n- { \"name\": \"Updated Product Name\", \"article\": \"Updated Product Article\", \"description\": \"Updated Product Description\", \"category\": \"Updated Product Category\", \"price\": 15.99, \"quantity\": 150}\n- **Response**:\n    - Status Code: `200 OK`\n    - Body: Returns the updated product object.\n\n### 5\\. Delete Product\n\n- **Endpoint**: `/{productId}`\n- **Method**: `DELETE`\n- **Description**: Deletes a specific product by its ID.\n- **Response**:\n    - Status Code: `204 No Content`\n\n## Sample Usage\n\nHere is a sample usage of the API endpoints:\n\n1. POST [http://localhost:8080/api/productsBody:{](http://localhost:8080/api/productsBody:{) \"name\": \"New Product\", \"article\": \"NP001\", \"description\": \"A new product\", \"category\": \"Electronics\", \"price\": 19.99, \"quantity\": 50}\n2. GET [http://localhost:8080/api/products](http://localhost:8080/api/products)\n3. GET [http://localhost:8080/api/products/1](http://localhost:8080/api/products/1)\n4. PUT [http://localhost:8080/api/products/1Body:{](http://localhost:8080/api/products/1Body:{) \"name\": \"Updated Product\", \"article\": \"UP001\", \"description\": \"An updated product\", \"category\": \"Electronics\", \"price\": 24.99, \"quantity\": 75}\n5. DELETE [http://localhost:8080/api/products/1](http://localhost:8080/api/products/1)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29107548"
+	},
+	"item": [
+		{
+			"name": "Get All Products",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/info?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/info",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Successful PUT request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+							"});",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Add your name in the body\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/info?id=1",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"info"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				},
+				"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful DELETE request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 202, 204]);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/products/ae03a5f7-ee57-4640-823d-16b42d6200ae",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products",
+						"ae03a5f7-ee57-4640-823d-16b42d6200ae"
+					]
+				},
+				"description": "This is a DELETE request, and it is used to delete data that was previously created via a POST request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful DELETE request typically returns a `200 OK`, `202 Accepted`, or `204 No Content` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
