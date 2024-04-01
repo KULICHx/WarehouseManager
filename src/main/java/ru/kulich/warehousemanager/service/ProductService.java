@@ -25,8 +25,6 @@ public class ProductService {
      * @return Созданный продукт.
      */
     public Product createProduct(Product product) {
-        // Установка значений по умолчанию перед сохранением товара, если необходимо
-        // Например, установка даты создания
         product.setCreatedAt(new Date());
         return productRepository.save(product);
     }
@@ -59,7 +57,6 @@ public class ProductService {
      */
     public Product updateProduct(UUID id, Product product) {
         Product existingProduct = getProductById(id);
-        // Обновление существующего товара данными из переданного товара
         existingProduct.setName(product.getName());
         existingProduct.setArticle(product.getArticle());
         existingProduct.setDescription(product.getDescription());
